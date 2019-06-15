@@ -18,6 +18,12 @@ import com.github.pagehelper.PageInterceptor;
 
 import tk.mybatis.spring.annotation.MapperScan;
 
+
+/**
+ * 数据源配置
+ * @author wangchen
+ *
+ */
 @Configuration
 @MapperScan("com.hp.roam.dao")
 @EnableTransactionManagement
