@@ -1,0 +1,103 @@
+#server.port=8443
+#server.ssl.key-store=classpath:214481176860722.pfx
+#server.ssl.key-store-password=214481176860722
+#server.ssl.key-store-type=PKCS12
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /security
+spring:
+  jackson:
+    default-property-inclusion: non-empty
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+
+#数据库配置
+  datasource:
+    name: test
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true
+    username: root
+    password: 111111
+    #username: lespms
+    #password: root@!123
+    #使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    # 初始化大小，最小，最大
+    initialSize: 1
+    #最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 
+    minIdle: 5
+    #最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒 
+    minEvictableIdleTimeMillis: 300000
+    #用来验证数据库连接的有效性。
+    validationQuery: SELECT 1 FROM DUAL
+    #指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    testWhileIdle: true
+    #指明是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个.
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    testOnBorrow: false
+    #指明是否在归还到池中前进行检验
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    testOnReturn: false
+    #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+    poolPreparedStatements: true
+    #statement池能够同时分配的打开的statements的最大数量, 如果设置为0表示不限制
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #配置监控druid相关的信息
+    druid:
+      stat-view-servlet:
+        allow: 127.0.0.1
+        deny: 15.38.13.201
+        login-username: admin
+        login-password: 123456
+        url-pattern: /druid/*
+        reset-enable: false
+      web-stat-filter:
+       # exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+        url-pattern: /*
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.hp.roam.model
+  
+mapper:
+  mappers: com.hp.roam.universal.Mapper
+  not-empty: false
+  identity: MYSQL
+  
+#PageHelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check 
+
+#logging:
+#  file: C:/Java/log/springboot.log
+logback:
+  #logdir: C:\\Users\\hpadmin\\java\\roam\\log\\roamtest
+  logdir: C:\\Java\\log\\hp-roam
+  appname: springsecurity
+  
+openfire:
+  domain: lr1tgr-test2.scs.rd.hpicorp.net
+  host: 15.96.132.45
+  port: 5222
+  
