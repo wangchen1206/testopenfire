@@ -25,6 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		return new CustomerUserService();
 	}
 	
+	/**
+	 * 注册加密器
+	 * @return
+	 */
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder(){
 		return new BCryptPasswordEncoder();
@@ -44,16 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests()
-//			.antMatchers("/css/**").permitAll()
-//			.antMatchers("/start").permitAll()
-//			.anyRequest().authenticated()//所有请求需认证即登陆后才能访问
-//			.and()
-//			.formLogin()
-//				.loginPage("/login")
-//				.failureUrl("/login?error")//定义登陆失败的页面
-//				.permitAll()//定义登录行为，登录页面可任意访问
-//			.and()
-//			.logout().permitAll();//定义注销请求，注销请求可任意访问
+		http.authorizeRequests()
+			.antMatchers("/css/**").permitAll()
+			.antMatchers("/start").permitAll()
+			.anyRequest().authenticated()//所有请求需认证即登陆后才能访问
+			.and()
+			.formLogin()
+				.loginPage("/login")
+				.failureUrl("/login?error")//定义登陆失败的页面
+				.permitAll()//定义登录行为，登录页面可任意访问
+			.and()
+			.logout().permitAll();//定义注销请求，注销请求可任意访问
 	}
 }

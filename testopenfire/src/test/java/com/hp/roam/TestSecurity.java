@@ -15,14 +15,10 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Message.Type;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.jivesoftware.smack.util.StringUtils;
 import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.hp.roam.config.DummySSLSocketFactory;
-import com.hp.roam.config.TreadPoolConfig;
 import com.hp.roam.model.SysUser;
 import com.hp.roam.util.XmppConnection;
 
@@ -34,6 +30,13 @@ public class TestSecurity {
 	
 	
 
+	@Test
+	public void TestLombok(){
+		TestLombok testLombok = TestLombok.builder().age(11).username("jin").build();
+		System.out.println(testLombok);
+	}
+	
+	
 	@Test
 	public void testBCryptPassword(){
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
